@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "_macros.html" import mensajes, detalle with context %}
+{% block titulo %}Consultar Agente Inteligente{% endblock %}
+{% block contenido %}
+<section class="ventana">
+  <header class="ventana-titulo"><h2>Consultar Agente Inteligente</h2><p>Busque un agente por su código, o por nombre y/o estado operativo.</p></header>
+  <div class="ventana-cuerpo">
+    <div class="pestanas">
+      <a class="{{ 'activa' if criterio == 'codigo' }}" href="{{ url_for('agente.consultar', criterio='codigo') }}">Por código</a>
+      <a class="{{ 'activa' if criterio == 'criterios' }}" href="{{ url_for('agente.consultar', criterio='criterios') }}">Por nombre / estado</a>
+    </div>
+    <form class="barra-busqueda" method="get">
+      <input type="hidden" name="criterio" value="{{ criterio }}">
+      {% if criterio == 'codigo' %}
+        <label>ID del agente inteligente <input type="number" name="id" min="1" value="{{ args.get('id', '') }}" required></label>
+      {% else %}
+        <label>Nombre (contiene) <input type="text" name="nombre" value="{{ args.get('nombre', '') }}" placeholder="Ej: norte"></label>
+        <label>Estado operativo
+          <select name="estado">
+            <option value="">-- Cualquiera --</option>
+            {% for e in ESTADOS %}<option value="{{ e }}" {% if args.get('estado') == e %}selected{% endif %}>{{ e }}</option>{% endfor %}
+          </select>
+        </label>
+      {% endif %}
+      <button class="btn" type="submit">Consultar</button>
+    </form>
+    {{ mensajes() }}
+    {% if agente %}{{ detalle(agente) }}{% endif %}
+  </div>
+</section>
+{% endblock %}

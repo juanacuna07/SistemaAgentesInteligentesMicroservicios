@@ -1,0 +1,42 @@
+<!doctype html>
+{% from "_iconos.html" import icono %}
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Agentes Inteligentes{% endblock %} · Cliente Flask</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+  <nav class="menu">
+    <span class="marca">{{ icono('marca', 20) }} Agentes IA</span>
+    <div class="menu-item"><button>Archivo {{ icono('flecha', 14) }}</button>
+      <div class="desplegable"><a href="{{ url_for('principal.inicio') }}">{{ icono('inicio') }} Inicio</a></div>
+    </div>
+    <div class="menu-item"><button>Agente Inteligente {{ icono('flecha', 14) }}</button>
+      <div class="desplegable">
+        <a href="{{ url_for('agente.adicionar') }}">{{ icono('adicionar') }} Adicionar</a>
+        <a href="{{ url_for('agente.eliminar') }}">{{ icono('eliminar') }} Eliminar</a>
+        <a href="{{ url_for('agente.listar') }}">{{ icono('listar') }} Listar</a>
+        <a href="{{ url_for('agente.actualizar') }}">{{ icono('actualizar') }} Actualizar</a>
+        <a href="{{ url_for('agente.consultar') }}">{{ icono('consultar') }} Consultar</a>
+      </div>
+    </div>
+    <div class="menu-item"><button>Ayuda {{ icono('flecha', 14) }}</button>
+      <div class="desplegable"><a href="{{ url_for('principal.acerca_de') }}">{{ icono('info') }} Acerca de...</a></div>
+    </div>
+  </nav>
+
+  <main class="contenido">
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <footer class="estado-barra">
+    <span>Cliente Web Python (Flask) · Gestión de Agentes Inteligentes</span>
+    <span>Servidor: localhost:8081/graphql · v{{ VERSION }}</span>
+  </footer>
+</body>
+</html>

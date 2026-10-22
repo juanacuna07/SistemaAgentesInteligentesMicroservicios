@@ -1,0 +1,13 @@
+# Copie estas operaciones en http://localhost:8081/graphiql (editor de ARRIBA) para probar el servidor.
+
+query { agentesInteligentes { idAgente nombre nivelAutonomia estadoOperativo nivelConfianza fechaRegistro agentesNavegacion { idNavegacion nombre destino } } }
+
+query { agentesInteligentes(nombre: "ibague", estadoOperativo: "ACTIVO") { idAgente nombre } }
+
+query { agentesNavegacion(destino: "aeropuerto") { idNavegacion nombre origen destino precisionGPS fechaUltimaCalibracion idAgenteInteligente } }
+
+mutation {
+  crearAgenteNavegacion(input: { idNavegacion: 5, nombre: "Ruta Express", origen: "La Pola",
+    destino: "Parque Centenario", precisionGPS: 88.5, fechaUltimaCalibracion: "2026-10-20T10:00",
+    idAgenteInteligente: 2 }) { idNavegacion nombre }
+}

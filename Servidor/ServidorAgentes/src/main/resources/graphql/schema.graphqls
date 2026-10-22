@@ -1,0 +1,69 @@
+# =====================================================================
+#  Sistema de Agentes Inteligentes - Esquema GraphQL (Segundo Proyecto)
+#  Maestro: AgenteInteligente (1..1)  ->  Detalle: AgenteNavegacion (0..*)
+#  Las fechas (LocalDateTime) viajan como texto ISO: 2026-10-22T14:30
+# =====================================================================
+
+type Query {
+    "Listar: sin argumentos devuelve TODOS; con argumentos filtra por nombre (contiene) y/o estado operativo"
+    agentesInteligentes(nombre: String, estadoOperativo: String): [AgenteInteligente]
+    "Busqueda individual por ID"
+    agenteInteligentePorId(idAgente: Int!): AgenteInteligente
+    "Consulta de UN agente a partir de uno o dos parametros"
+    agenteInteligentePorCriterios(nombre: String, estadoOperativo: String): AgenteInteligente
+
+    "Listar: sin argumentos devuelve TODOS; con argumentos filtra por destino (contiene) y/o agente inteligente"
+    agentesNavegacion(destino: String, idAgenteInteligente: Int): [AgenteNavegacion]
+    agenteNavegacionPorId(idNavegacion: Int!): AgenteNavegacion
+    agenteNavegacionPorCriterios(nombre: String, idAgenteInteligente: Int): AgenteNavegacion
+}
+
+type Mutation {
+    crearAgenteInteligente(input: AgenteInteligenteInput!): AgenteInteligente
+    actualizarAgenteInteligente(input: AgenteInteligenteInput!): AgenteInteligente
+    eliminarAgenteInteligente(idAgente: Int!): AgenteInteligente
+
+    crearAgenteNavegacion(input: AgenteNavegacionInput!): AgenteNavegacion
+    actualizarAgenteNavegacion(input: AgenteNavegacionInput!): AgenteNavegacion
+    eliminarAgenteNavegacion(idNavegacion: Int!): AgenteNavegacion
+}
+
+type AgenteInteligente {
+    idAgente: Int
+    nombre: String
+    nivelAutonomia: Float
+    "ACTIVO, INACTIVO o MANTENIMIENTO"
+    estadoOperativo: String
+    nivelConfianza: Float
+    fechaRegistro: String
+    agentesNavegacion: [AgenteNavegacion]
+}
+
+input AgenteInteligenteInput {
+    idAgente: Int!
+    nombre: String!
+    nivelAutonomia: Float!
+    estadoOperativo: String!
+    nivelConfianza: Float!
+    fechaRegistro: String!
+}
+
+type AgenteNavegacion {
+    idNavegacion: Int
+    nombre: String
+    origen: String
+    destino: String
+    precisionGPS: Float
+    fechaUltimaCalibracion: String
+    idAgenteInteligente: Int
+}
+
+input AgenteNavegacionInput {
+    idNavegacion: Int!
+    nombre: String!
+    origen: String!
+    destino: String!
+    precisionGPS: Float!
+    fechaUltimaCalibracion: String!
+    idAgenteInteligente: Int!
+}

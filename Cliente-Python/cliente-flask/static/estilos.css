@@ -1,0 +1,83 @@
+:root { --fondo:#f3f5f9; --panel:#fff; --texto:#1d2433; --suave:#5b6476; --borde:#d9dee8; --primario:#0c8599; --primario-osc:#0b7285; --peligro:#d63939; --exito:#2b8a3e; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif; color:var(--texto); background:var(--fondo); min-height:100vh; display:flex; flex-direction:column; }
+a { color: inherit; text-decoration: none; }
+
+.menu { display:flex; align-items:center; gap:4px; background:#1d2433; padding:0 16px; height:48px; }
+.marca { color:#fff; font-weight:700; margin-right:18px; }
+.menu-item { position:relative; }
+.menu-item > button { background:none; border:0; color:#e6e9f0; padding:14px 12px; cursor:pointer; font-size:14px; }
+.menu-item:hover > button { background:#2c3550; }
+.desplegable { display:none; position:absolute; top:48px; left:0; background:var(--panel); border:1px solid var(--borde); border-radius:6px; box-shadow:0 8px 20px rgba(0,0,0,.12); min-width:180px; z-index:10; overflow:hidden; }
+.menu-item:hover .desplegable, .menu-item:focus-within .desplegable { display:block; }
+.desplegable a { display:block; padding:10px 14px; font-size:14px; }
+.desplegable a:hover { background:#e3f6f8; }
+
+.contenido { flex:1; padding:28px 16px; display:flex; justify-content:center; align-items:flex-start; }
+.inicio { text-align:center; margin-top:60px; }
+.inicio h1 { font-size:2rem; margin-bottom:8px; }
+.subtitulo { color:var(--suave); }
+
+.ventana { width:100%; max-width:980px; background:var(--panel); border:1px solid var(--borde); border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+.ventana.angosta { max-width:480px; }
+.ventana-titulo { padding:16px 22px; border-bottom:1px solid var(--borde); }
+.ventana-titulo h2 { margin:0; font-size:1.25rem; }
+.ventana-titulo p { margin:4px 0 0; color:var(--suave); font-size:14px; }
+.ventana-cuerpo { padding:20px 22px; }
+.ventana-cuerpo h3 { font-size:1rem; margin:18px 0 8px; }
+
+.formulario { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+.formulario .ancho { grid-column:1 / -1; }
+label { display:flex; flex-direction:column; gap:5px; font-size:13px; font-weight:600; color:var(--suave); }
+label.check { flex-direction:row; align-items:center; font-weight:500; }
+input, select { padding:8px 10px; border:1px solid var(--borde); border-radius:6px; font-size:14px; color:var(--texto); background:#fff; }
+input[readonly] { background:#eef0f4; }
+
+.barra-busqueda { display:flex; flex-wrap:wrap; align-items:flex-end; gap:12px; margin-bottom:14px; }
+.acciones { display:flex; justify-content:flex-end; gap:10px; margin-top:16px; }
+.btn { display:inline-block; background:var(--primario); color:#fff; border:0; border-radius:6px; padding:9px 18px; font-size:14px; cursor:pointer; }
+.btn:hover { background:var(--primario-osc); }
+.btn.secundario { background:#e9ecf3; color:var(--texto); }
+.btn.peligro { background:var(--peligro); }
+
+.mensaje { margin-top:14px; padding:10px 14px; border-radius:6px; font-size:14px; white-space:pre-line; }
+.mensaje.error { background:#fdecec; color:#a61e1e; }
+.mensaje.exito { background:#e8f6ec; color:var(--exito); }
+.aviso { color:#b35c00; font-size:14px; }
+
+.detalle { display:grid; grid-template-columns:200px 1fr; border:1px solid var(--borde); border-radius:8px; overflow:hidden; margin:6px 0 0; }
+.detalle dt, .detalle dd { margin:0; padding:8px 12px; border-bottom:1px solid var(--borde); font-size:14px; }
+.detalle dt { background:#f6f7fb; font-weight:600; }
+.lista-tareas { margin:0; padding-left:18px; }
+
+.pestanas { display:flex; gap:6px; margin-bottom:14px; }
+.pestanas a { border:1px solid var(--borde); padding:7px 14px; border-radius:20px; font-size:14px; }
+.pestanas a.activa { background:var(--primario); color:#fff; border-color:var(--primario); }
+
+.tabla-contenedor { overflow-x:auto; }
+.grilla { width:100%; border-collapse:collapse; font-size:14px; }
+.grilla th { background:#f6f7fb; text-align:left; padding:9px 10px; border-bottom:2px solid var(--borde); }
+.grilla td { padding:8px 10px; border-bottom:1px solid var(--borde); }
+.vacio { text-align:center; color:var(--suave); }
+.estado { padding:2px 8px; border-radius:10px; font-size:12px; font-weight:600; }
+.estado.ACTIVO { background:#e8f6ec; color:#2b8a3e; }
+.estado.MANTENIMIENTO { background:#fff4e0; color:#b35c00; }
+.estado.INACTIVO { background:#f1f3f5; color:#868e96; }
+.total, .pie { color:var(--suave); font-size:13px; }
+
+.estado-barra { display:flex; justify-content:space-between; padding:6px 16px; background:#e6e9f0; font-size:12px; color:var(--suave); }
+
+/* Tipografía humanista */
+h1, h2, h3, .marca, .btn, .menu-item > button, .pestanas a { font-family: "Nunito", "Nunito Sans", "Segoe UI", system-ui, sans-serif; }
+h1, h2 { letter-spacing: -0.01em; }
+input, select, button { font-family: inherit; }
+.grilla td { font-variant-numeric: tabular-nums; }
+
+/* Iconos */
+.icono { flex-shrink: 0; vertical-align: middle; }
+.marca { display: inline-flex; align-items: center; gap: 8px; }
+.menu-item > button { display: inline-flex; align-items: center; gap: 4px; }
+.desplegable a { display: flex; align-items: center; gap: 10px; }
+.desplegable .icono { color: var(--suave); }
+.aviso { display: flex; align-items: center; gap: 6px; }
+.icono-inicio { color: var(--primario); margin-bottom: 4px; }
