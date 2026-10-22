@@ -1,0 +1,17 @@
+# Copie estas operaciones en http://localhost:8081/graphiql (editor de ARRIBA) para probar el servidor.
+# El servidor inicia SIN datos: primero cree un agente inteligente y luego sus agentes de navegacion.
+
+mutation {
+  crearAgenteInteligente(input: { idAgente: 1, nombre: "Coordinador Ibague Centro", nivelAutonomia: 85,
+    estadoOperativo: "ACTIVO", nivelConfianza: 90, fechaRegistro: "2026-08-01T09:00" }) { idAgente nombre }
+}
+
+mutation {
+  crearAgenteNavegacion(input: { idNavegacion: 1, nombre: "NaviBot Centro", origen: "Universidad de Ibague",
+    destino: "Centro Comercial Multicentro", precisionGPS: 95.5, fechaUltimaCalibracion: "2026-09-10T08:30",
+    idAgenteInteligente: 1 }) { idNavegacion nombre }
+}
+
+query { agentesInteligentes { idAgente nombre nivelAutonomia estadoOperativo nivelConfianza fechaRegistro agentesNavegacion { idNavegacion nombre destino } } }
+
+query { agentesNavegacion(destino: "centro") { idNavegacion nombre origen destino precisionGPS fechaUltimaCalibracion idAgenteInteligente } }

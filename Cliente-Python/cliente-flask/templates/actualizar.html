@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_macros.html" import mensajes, detalle, buscador, formulario with context %}
+{% block titulo %}Actualizar Agente Inteligente{% endblock %}
+{% block contenido %}
+<section class="ventana">
+  <header class="ventana-titulo"><h2>Actualizar Agente Inteligente</h2><p>Busque el agente, revise su información actual y modifique los campos deseados.</p></header>
+  <div class="ventana-cuerpo">
+    {{ buscador('agente.actualizar', id_buscado) }}
+    {{ mensajes() }}
+    {% if agente %}
+      <h3>Información actual</h3>
+      {{ detalle(agente) }}
+      <h3>Nuevos datos</h3>
+      <form method="post">
+        {{ formulario(form, id_bloqueado=true) }}
+        <div class="acciones"><button class="btn" type="submit">Guardar cambios</button></div>
+      </form>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
